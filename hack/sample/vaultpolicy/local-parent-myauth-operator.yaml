@@ -1,0 +1,18 @@
+--- 
+apiVersion: api.gensec.ibm.com/v1
+kind: VaultPolicy
+metadata: 
+  name: local-parent-myauth-operator
+spec: 
+  policyName: operator
+  vaultNamespace: parent
+  policies: 
+    paths: 
+      - capabilities: 
+          - create
+          - read
+          - list
+          - update
+          - delete
+          - sudo
+        path: secret/*

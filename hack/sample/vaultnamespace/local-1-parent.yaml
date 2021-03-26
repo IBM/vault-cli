@@ -1,0 +1,7 @@
+apiVersion: api.gensec.ibm.com/v1
+kind: VaultNamespace
+metadata:
+  name: local-1-parent
+spec:
+  namespaceBase: root
+  namespaceName: parent

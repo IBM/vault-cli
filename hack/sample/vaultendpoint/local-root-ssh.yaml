@@ -1,0 +1,14 @@
+apiVersion: api.gensec.ibm.com/v1
+kind: VaultEndpoint
+metadata:
+  name: local-root-ssh
+spec:
+  vaultNamespace: root
+  path: ssh
+  mountOptions:
+    type: ssh
+    description: "the mount point for /ssh"
+  tuneOptions:
+      defaultLeaseTTL: 2764810
+      forceNoCache: false
+      maxLeaseTTL: 315360000

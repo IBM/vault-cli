@@ -1,0 +1,12 @@
+apiVersion: api.gensec.ibm.com/v1
+kind: VaultAuth
+metadata:
+  name: local-parent-approle-myauth
+spec:
+  vaultNamespace: parent
+  path: myauth
+  data:
+    type : approle
+    description: Parent namespace Approle myauth
+    defaultLeaseTTL: 2764800
+    maxLeaseTTL: 2764800

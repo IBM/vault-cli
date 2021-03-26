@@ -1,0 +1,24 @@
+apiVersion: api.gensec.ibm.com/v1
+kind: JWTRole
+metadata:
+  name: root-parent-jwt-operator
+spec:
+  authPath: jwt
+  vaultNamespace: parent
+  roleName: operator
+  parameters:
+    roleType: jwt
+    tokenPolicies: 
+      - operator
+    boundSubject: r3qX9DljwFIWhsiqwFiu38209F10atW6@clients
+    boundAudiences: 
+      - https://vault.plugin.auth.jwt.test
+    userClaim: serviceAccount
+    claimMappings:
+      serviceAccount: serviceAccount
+      mzone: mzone
+      nodeID: nodeID
+    policies: 
+      - operator
+    tokenTTL: 36000
+

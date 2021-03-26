@@ -1,0 +1,12 @@
+apiVersion: api.gensec.ibm.com/v1
+kind: VaultAuth
+metadata:
+  name: local-parent-auth-my-jwt
+spec:
+  vaultNamespace: parent
+  path: jwt
+  data:
+    type : jwt
+    description:  my jwt
+  jwtConfig:
+    jwtValidationPubkeys: "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwhGMLDNXY9DmNBXnM5EU\naEkLAq97rs2jVY3v5NpbsqnLKoOziLyyvzqKlQYSM+AmyXzmzPMfCnMrV9Nvek8n\n46Mb1gcMk1EalQLtixuVTF/CVQ4urvd2Ll+Bv8xvGCRnyrmnM+qzSNUaPcgfW5fS\nAZKOglaU6Vr3hvFIOiiGrzilWuSv1yJWpCQyVbfwA11Pc1gqixuYtYfHrBM5YpDL\nwh44nU5vivFGidagXoJJNemqxZwzdnOqQLU21UPVK6YrRcF4R3vzbNPvJT5rQrfx\nWJIiE3qIKdgL6I76na2DzhVbqmUXBydZGWtZ+I4oxOpYgBbaIuwVkCwLYMhPElK4\nVQIDAQAB\n-----END PUBLIC KEY-----\n"

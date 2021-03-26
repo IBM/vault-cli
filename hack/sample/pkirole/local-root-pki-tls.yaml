@@ -1,0 +1,72 @@
+apiVersion: api.gensec.ibm.com/v1
+kind: PKIRole
+metadata:
+  name: local-root-pki-tls
+spec:
+  issuerPath: pki
+  vaultNamespace: root
+  roleName: tls
+  config:
+    country: [US]
+    province: [New York]
+    locality: [Armonk]
+    ou: ["IBM Cloud Virtual Private Cloud"]
+    # allowAnyName (bool: false)
+    allowAnyName: true 
+    # allowBareDomains (bool: false) 
+    allowBareDomains: true
+    # allowGlobDomains (bool: false)
+    allowGlobDomains: true
+    # allowIPSANs (bool: true)
+    allowIPSANs: true
+    # allowLocalhost (bool: true)
+    allowLocalhost: true
+    # allowSubdomains (bool: false) 
+    allowSubdomains: true
+    # allowedDomains (list: []) 
+    allowedDomains: []
+    # allowedOtherSANs (string: "")
+    allowedOtherSANs: ""
+    # allowedURISANs (string: "")
+    allowedURISANs: []
+    # basicConstraintesValidForNonCA (bool: false) 
+    basicConstraintesValidForNonCA: false
+    # clientFlag (bool: true)
+    clientFlag: true
+    # codeSigningFlag (bool: false) 
+    codeSigningFlag: false
+    # emailProtectionFlag (bool: false)
+    emailProtectionFlag: false
+    # enforceHostnames (bool: true)
+    enforceHostnames: false
+    # extKeyUsage (list: [])
+    extKeyUsage: ["ServerAuth", "ClientAuth"]
+    # extKeyUsageOIDs (list: []) 
+    extKeyUsageOIDs: []
+    # generateLease (bool: false)
+    generateLease: false
+    # keyBits (int: 2048)
+    keyBits: 2048
+    # keyType (string: "rsa")
+    keyType: rsa
+    # keyUsage (list: ["DigitalSignature", "KeyAgreement", "KeyEncipherment"])
+    keyUsage: ["DigitalSignature", "KeyEncipherment"]
+    # maxTTL (int: 0) 
+    maxTTL: 31536000
+    # noStore (bool: false) 
+    noStore: true
+    # notBeforeDurationn (int: 30)
+    notBeforeDurationn: 30
+    # policyIdentifiers (list: [])
+    policyIdentifiers: []
+    # requireCN (bool: true) 
+    requireCN: true
+    # serverFlag (bool: true)
+    serverFlag: true
+    # ttl (int64: 0) 
+    ttl: 31536000
+    # useCSRCommonName (bool: true)
+    useCSRCommonName: true
+    # useCSRSANs (bool: true) 
+    useCSRSANs: true
+status: {}

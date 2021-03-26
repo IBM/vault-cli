@@ -1,0 +1,18 @@
+apiVersion: api.gensec.ibm.com/v1
+kind: VaultRole
+metadata:
+  creationTimestamp: null
+  name: local-parent-approle-operator
+spec:
+  authMethod: myauth
+  vaultNamespace: parent
+  roleName: operator
+  data:
+    bindSecretID: true
+    policies:
+      - operator 
+    tokenMaxTTL: 4500
+    tokenPolicies:
+      - operator
+    tokenTTL: 4500
+    tokenType: default

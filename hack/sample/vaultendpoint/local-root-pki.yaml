@@ -1,0 +1,26 @@
+apiVersion: api.gensec.ibm.com/v1
+kind: VaultEndpoint
+metadata:
+  name: local-root-pki
+spec:
+  vaultNamespace: root
+  path: pki
+  mountOptions:
+    type: pki
+    description: "the mount point for /pki"
+  tuneOptions:
+      defaultLeaseTTL: 2764810
+      forceNoCache: false
+      maxLeaseTTL: 315360000
+  pkiConfig:
+    rootOptions:
+      generateOptions:
+        #AddBasicConstraints: true
+        keyBits: 224
+        keyType: ec
+    urls:
+      crlDistributionPoints:
+        - "/v1/pki/crl"
+      issuingCertificates:
+        - "/v1/pki/ca"
+    ocspServers: []
