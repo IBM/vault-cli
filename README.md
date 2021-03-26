@@ -20,13 +20,13 @@ vault server -dev -dev-root-token-id root -dev-listen-address 127.0.0.1:8200
 
 In second terminal
 
-- Clone https://github.com/ibm/vault-cli
-
 ```bash
+git clone https://github.com/ibm/vault-cli
 cd vault-cli
 go mod vendor
 go build
 ```
+
 The sample files for these examples are located here: [samples](hack/sample)
 
 ```bash
