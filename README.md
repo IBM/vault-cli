@@ -30,6 +30,12 @@ go build
 The sample files for these examples are located here: [samples](hack/sample)
 
 ```bash
+export VAULT_NAME=local
+export VAULT_TOKEN=root
+export VAULT_NAMESPACE=root
+export VAULT_ADDR=http://127.0.0.1:8200
+export VAULT_LOGIN_NAMESPACE=root
+
 ./vault-cli put vaultnamespace -c=local "local-*"
 ./vault-cli put vaultauth -c=local "local-*"
 ./vault-cli put vaultendpoint -c=local "local-*"
