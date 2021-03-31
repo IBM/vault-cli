@@ -70,7 +70,6 @@ func (c *PutVaultNamespaceCommand) Run(args []string) int {
 		fmt.Printf("Vault Namespace (%s) not found in inventory", vaultnamespacefilespec)
 		return 1
 	}
-
 	for _, f := range files {
 		filename := c.Meta.CurrentContext.InventoryPath + "/vaultnamespace/" + f
 		data, err := inventory.ReadFile(filename + ".yaml")
@@ -78,8 +77,13 @@ func (c *PutVaultNamespaceCommand) Run(args []string) int {
 			fmt.Println("error reading file: ", err.Error())
 			return 1
 		}
+		yamlbytes, err := c.Meta.TemplateService.Exec("Namespace", data, c.Meta.flagData)
+		if err != nil {
+			fmt.Printf("unable to apply template to vaultnamespace: %s\n", err.Error())
+			return 1
+		}
 		vaultNamespace := vaultapi.VaultNamespace{}
-		err = yaml.Unmarshal(data, &vaultNamespace)
+		err = yaml.Unmarshal(yamlbytes, &vaultNamespace)
 		if err != nil {
 			fmt.Printf("unable to marshal vaultnamespace: %s\n", err.Error())
 			return 1

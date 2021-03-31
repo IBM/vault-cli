@@ -10,6 +10,7 @@ import (
 	"github.com/ibm/vault-cli/pkg/config"
 	"github.com/ibm/vault-cli/pkg/configservice"
 	"github.com/ibm/vault-cli/pkg/secretservice"
+	"github.com/ibm/vault-cli/pkg/templateservice"
 	"github.com/mitchellh/cli"
 	"github.com/mitchellh/go-homedir"
 	"github.com/posener/complete"
@@ -25,10 +26,12 @@ type Meta struct {
 	Ui cli.Ui
 
 	flagConfigPath string
+	flagData       string
 	Config         *config.Config
 	ConfigService  configservice.ConfigService
 
-	SecretService secretservice.SecretService
+	SecretService   secretservice.SecretService
+	TemplateService templateservice.TemplateService
 
 	CurrentContext *config.Context
 
@@ -55,6 +58,8 @@ func (m *Meta) FlagSet(n string) *flag.FlagSet {
 	f.StringVar(&m.flagConfigPath, "config", "", "")
 	f.StringVar(&m.currentContextName, "c", "local", "")
 	f.StringVar(&m.currentContextName, "context", "local", "")
+	f.StringVar(&m.flagData, "data", "", "")
+	f.StringVar(&m.flagData, "d", "", "")
 	f.StringVar(&m.namespace, "n", "", "")
 	f.StringVar(&m.namespace, "namespace", "", "")
 	f.StringVar(&m.outputFormat, "o", "", "")
@@ -71,6 +76,8 @@ func (m *Meta) AutocompleteFlags() complete.Flags {
 		"-c":         complete.PredictAnything,
 		"-context":   complete.PredictAnything,
 		"-config":    complete.PredictAnything,
+		"-data":      complete.PredictAnything,
+		"-d":         complete.PredictAnything,
 		"-n":         complete.PredictAnything,
 		"-namespace": complete.PredictAnything,
 		"-no-color":  complete.PredictNothing,
@@ -87,6 +94,10 @@ func generalOptionsUsage() string {
   -config=<vault-cli-config path>
     The location if the cli config yaml file. Defaults to "~/.vault-cli/config.yaml"
 
+  -data=<json or file>
+    The data in json format either as escaped string or if the first character is
+	a "@" char then it will be a filename.
+	
   -namespace=<namespace>
     The target namespace for queries and actions bound to a namespace.
     Overrides the VAULT_CLI_NAMESPACE environment variable if set.

@@ -12,6 +12,7 @@ import (
 	"github.com/ibm/vault-cli/command"
 	"github.com/ibm/vault-cli/pkg/configservice/configfile"
 	"github.com/ibm/vault-cli/pkg/secretservice/vault"
+	"github.com/ibm/vault-cli/pkg/templateservice/template"
 	"github.com/ibm/vault-cli/version"
 	"github.com/mattn/go-colorable"
 	"github.com/mitchellh/cli"
@@ -94,6 +95,8 @@ func RunCustom(args []string) int {
 
 	// Inject vault secret service object into meta and get a session
 	secretsvc := vault.NewVaultService()
+
+	metaPtr.TemplateService = template.MakeTemplateService()
 
 	metaPtr.SecretService = secretsvc
 
