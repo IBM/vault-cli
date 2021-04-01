@@ -2,10 +2,10 @@
 apiVersion: api.gensec.ibm.com/v1
 kind: VaultPolicy
 metadata: 
-  name: local-parent-pki-admin
+  name: region-template
 spec: 
-  policyName: pki-admin
-  vaultNamespace: parent
+  policyName: operator-{{.region}}
+  vaultNamespace: root
   policies: 
     paths: 
       - capabilities: 
@@ -15,4 +15,4 @@ spec:
           - update
           - delete
           - sudo
-        path: pki/*
+        path: operator/{{.region}}/*

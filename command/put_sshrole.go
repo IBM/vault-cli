@@ -80,8 +80,13 @@ func (c *PutSSHRoleCommand) Run(args []string) int {
 			fmt.Println("error reading file: ", err.Error())
 			return 1
 		}
+		yamlbytes, err := c.Meta.TemplateService.Exec("SSHRole", data, c.Meta.flagData)
+		if err != nil {
+			fmt.Printf("unable to apply template to sshrole: %s\n", err.Error())
+			return 1
+		}
 		sshrole := vaultapi.SSHRole{}
-		err = yaml.Unmarshal(data, &sshrole)
+		err = yaml.Unmarshal(yamlbytes, &sshrole)
 		if err != nil {
 			fmt.Printf("unable to marshal sshrole: %s\n", err.Error())
 			return 1

@@ -1,7 +1,7 @@
 apiVersion: api.gensec.ibm.com/v1
 kind: PKIRole
 metadata:
-  name: local-root-pki-tls
+  name: root-pki-tls
 spec:
   issuerPath: pki
   vaultNamespace: root

@@ -83,8 +83,13 @@ func (c *PutVaultEndpointCommand) Run(args []string) int {
 			fmt.Println("error reading file: ", err.Error())
 			return 1
 		}
+		yamlbytes, err := c.Meta.TemplateService.Exec("VaultEndpoint", data, c.Meta.flagData)
+		if err != nil {
+			fmt.Printf("unable to apply template to vaultendpoint: %s\n", err.Error())
+			return 1
+		}
 		endpoint := vaultapi.VaultEndpoint{}
-		err = yaml.Unmarshal(data, &endpoint)
+		err = yaml.Unmarshal(yamlbytes, &endpoint)
 		if err != nil {
 			fmt.Printf("unable to marshal endpoint: %s\n", err.Error())
 			return 1

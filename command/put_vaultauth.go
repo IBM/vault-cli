@@ -80,10 +80,15 @@ func (c *PutVaultAuthCommand) Run(args []string) int {
 			fmt.Println("error reading file: ", err.Error())
 			return 1
 		}
-		vaultAuth := vaultapi.VaultAuth{}
-		err = yaml.Unmarshal(data, &vaultAuth)
+		yamlbytes, err := c.Meta.TemplateService.Exec("VaultAuth", data, c.Meta.flagData)
 		if err != nil {
-			fmt.Printf("unable to marshal vaultnamespace: %s\n", err.Error())
+			fmt.Printf("unable to apply template to vaultauth: %s\n", err.Error())
+			return 1
+		}
+		vaultAuth := vaultapi.VaultAuth{}
+		err = yaml.Unmarshal(yamlbytes, &vaultAuth)
+		if err != nil {
+			fmt.Printf("unable to marshal vaultauth: %s\n", err.Error())
 			return 1
 		}
 
