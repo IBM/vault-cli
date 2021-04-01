@@ -41,11 +41,22 @@ func getDefaultConfig() []byte {
 	bytes := []byte(`apiVersion: v1
 kind: Config
 contexts:
-- name: local
+- name: ns-test
   context:
     cluster: local
-    inventoryPath: "hack/sample"
+    inventoryPath: "hack/sample/ns-test"
     namespace: nextgen
+    session:
+      token: root
+      lease-duration: 7200
+      expires: 2582395696
+      renewable: true
+    user: localuser
+- name: tpl-test
+  context:
+    cluster: local
+    inventoryPath: "hack/sample/tpl-test"
+    namespace: root
     session:
       token: root
       lease-duration: 7200

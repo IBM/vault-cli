@@ -1,7 +1,7 @@
 apiVersion: api.gensec.ibm.com/v1
 kind: VaultNamespace
 metadata:
-  name: local-1-parent
+  name: region-template
 spec:
   namespaceBase: root
-  namespaceName: parent
+  namespaceName: region-{{.region}}

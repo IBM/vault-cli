@@ -18,7 +18,9 @@ func MakeTemplateService() templateservice.TemplateService {
 
 func (t *templateService) Exec(name string, tpl []byte, data string) ([]byte, error) {
 	var yamlbytes []byte
-	if data != "" {
+	if data == "" {
+		return tpl, nil
+	} else {
 		m := map[string]interface{}{}
 		if err := json.Unmarshal([]byte(data), &m); err != nil {
 			return nil, err

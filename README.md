@@ -36,15 +36,14 @@ export VAULT_NAMESPACE=root
 export VAULT_ADDR=http://127.0.0.1:8200
 export VAULT_LOGIN_NAMESPACE=root
 
-./vault-cli put vaultnamespace -c=local "local-*"
-./vault-cli put vaultauth -c=local "local-*"
-./vault-cli put vaultendpoint -c=local "local-*"
-./vault-cli put vaultpolicy -c=local "local-*"
-./vault-cli put vaultrole -c=local "local-*"
-./vault-cli put jwtrole -c=local "local-*"
-./vault-cli put pkirole -c=local "local-*"
-./vault-cli put sshrole -c=local "local-*"
-
+./vault-cli put vaultnamespace -c=ns-test "*"
+./vault-cli put vaultauth -c=ns-test "*"
+./vault-cli put vaultendpoint -c=ns-test "*"
+./vault-cli put vaultpolicy -c=ns-test "*"
+./vault-cli put vaultrole -c=ns-test "*"
+./vault-cli put jwtrole -c=ns-test "*"
+./vault-cli put pkirole -c=ns-test "*"
+./vault-cli put sshrole -c=ns-test "*"
 
 vault namespace list -namespace=root
 vault namespace list -namespace=parent
@@ -54,4 +53,14 @@ vault read -namespace=parent /auth/jwt/role/operator
 vault read -namespace=root /pki/roles/tls
 vault read -namespace=root /ssh/roles/operator
 vault read -namespace=parent /auth/myauth/role/operator
+```
+
+## templates
+
+```bash
+# templates
+./vault-cli put vaultnamespace -c=tpl-test "*"
+
+vault namespace list -namespace=root
+
 ```

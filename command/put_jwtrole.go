@@ -80,8 +80,13 @@ func (c *PutJWTRoleCommand) Run(args []string) int {
 			fmt.Println("error reading file: ", err.Error())
 			return 1
 		}
+		yamlbytes, err := c.Meta.TemplateService.Exec("JWTRole", data, c.Meta.flagData)
+		if err != nil {
+			fmt.Printf("unable to apply template to jwtrole: %s\n", err.Error())
+			return 1
+		}
 		jwtrole := vaultapi.JWTRole{}
-		err = yaml.Unmarshal(data, &jwtrole)
+		err = yaml.Unmarshal(yamlbytes, &jwtrole)
 		if err != nil {
 			fmt.Printf("unable to marshal jwtrole: %s\n", err.Error())
 			return 1

@@ -84,8 +84,13 @@ func (c *PutVaultRoleCommand) Run(args []string) int {
 			fmt.Println("error reading file: ", err.Error())
 			return 1
 		}
+		yamlbytes, err := c.Meta.TemplateService.Exec("VaultRole", data, c.Meta.flagData)
+		if err != nil {
+			fmt.Printf("unable to apply template to vaultrole: %s\n", err.Error())
+			return 1
+		}
 		vaultRole := vaultapi.VaultRole{}
-		err = yaml.Unmarshal(data, &vaultRole)
+		err = yaml.Unmarshal(yamlbytes, &vaultRole)
 		if err != nil {
 			fmt.Printf("unable to marshal vaultrole: %s\n", err.Error())
 			return 1

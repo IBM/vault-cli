@@ -79,8 +79,13 @@ func (c *PutVaultPolicyCommand) Run(args []string) int {
 			fmt.Println("error reading file: ", err.Error())
 			return 1
 		}
+		yamlbytes, err := c.Meta.TemplateService.Exec("VaultPolicy", data, c.Meta.flagData)
+		if err != nil {
+			fmt.Printf("unable to apply template to vaultpolicy: %s\n", err.Error())
+			return 1
+		}
 		vaultPolicy := vaultapi.VaultPolicy{}
-		err = yaml.Unmarshal(data, &vaultPolicy)
+		err = yaml.Unmarshal(yamlbytes, &vaultPolicy)
 		if err != nil {
 			fmt.Printf("unable to marshal vaultpolicy: %s\n", err.Error())
 			return 1

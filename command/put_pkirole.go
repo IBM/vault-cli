@@ -80,8 +80,13 @@ func (c *PutPKIRoleCommand) Run(args []string) int {
 			fmt.Println("error reading file: ", err.Error())
 			return 1
 		}
+		yamlbytes, err := c.Meta.TemplateService.Exec("JWTRole", data, c.Meta.flagData)
+		if err != nil {
+			fmt.Printf("unable to apply template to jwtrole: %s\n", err.Error())
+			return 1
+		}
 		pkirole := vaultapi.PKIRole{}
-		err = yaml.Unmarshal(data, &pkirole)
+		err = yaml.Unmarshal(yamlbytes, &pkirole)
 		if err != nil {
 			fmt.Printf("unable to marshal pkirole: %s\n", err.Error())
 			return 1
