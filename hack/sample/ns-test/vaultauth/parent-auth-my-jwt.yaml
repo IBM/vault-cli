@@ -1,7 +1,7 @@
 apiVersion: api.gensec.ibm.com/v1
 kind: VaultAuth
 metadata:
-  name: local-parent-auth-my-jwt
+  name: parent-auth-my-jwt
 spec:
   vaultNamespace: parent
   path: jwt

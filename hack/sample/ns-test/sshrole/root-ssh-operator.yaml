@@ -1,7 +1,7 @@
 apiVersion: api.gensec.ibm.com/v1
 kind: SSHRole
 metadata:
-  name: local-root-ssh-operator
+  name: root-ssh-operator
 spec:
   signerPath: ssh
   vaultNamespace: root

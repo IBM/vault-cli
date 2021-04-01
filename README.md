@@ -59,7 +59,8 @@ vault read -namespace=parent /auth/myauth/role/operator
 
 ```bash
 # templates
-./vault-cli put vaultnamespace -c=tpl-test "*"
+./vault-cli put vaultnamespace -c=tpl-test -d="{\"region\":\"foo\"}" "*"
+./vault-cli put vaultpolicy -c=tpl-test -d="{\"region\":\"foo\"}" "*"
 
 vault namespace list -namespace=root
 

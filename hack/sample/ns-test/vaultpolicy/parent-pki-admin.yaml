@@ -2,9 +2,9 @@
 apiVersion: api.gensec.ibm.com/v1
 kind: VaultPolicy
 metadata: 
-  name: local-parent-myauth-operator
+  name: parent-pki-admin
 spec: 
-  policyName: operator
+  policyName: pki-admin
   vaultNamespace: parent
   policies: 
     paths: 
@@ -15,4 +15,4 @@ spec:
           - update
           - delete
           - sudo
-        path: secret/*
+        path: pki/*

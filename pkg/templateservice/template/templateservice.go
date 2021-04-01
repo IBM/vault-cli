@@ -17,20 +17,19 @@ func MakeTemplateService() templateservice.TemplateService {
 }
 
 func (t *templateService) Exec(name string, tpl []byte, data string) ([]byte, error) {
-	var yamlbytes []byte
 	if data == "" {
-		return tpl, nil
-	} else {
-		m := map[string]interface{}{}
-		if err := json.Unmarshal([]byte(data), &m); err != nil {
-			return nil, err
-		}
-		fmt.Printf("%v", m)
-		var err error
-		yamlbytes, err = t.ParseAndExecute(name, tpl, m)
-		if err != nil {
-			return nil, err
-		}
+		data = "{}"
+	}
+	var yamlbytes []byte
+	m := map[string]interface{}{}
+	if err := json.Unmarshal([]byte(data), &m); err != nil {
+		return nil, err
+	}
+	fmt.Printf("%v", m)
+	var err error
+	yamlbytes, err = t.ParseAndExecute(name, tpl, m)
+	if err != nil {
+		return nil, err
 	}
 	return yamlbytes, nil
 }
