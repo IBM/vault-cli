@@ -65,3 +65,10 @@ vault read -namespace=parent /auth/myauth/role/operator
 vault namespace list -namespace=root
 
 ```
+
+## secrets
+
+```bash
+./vault-cli put vaultendpoint -c=ns-test demo-secret-engine
+./vault-cli put secret -c=ns-test -namespace=root demo-password password=foo
+```

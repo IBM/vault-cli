@@ -3,7 +3,6 @@ package template
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 	"html/template"
 
 	"github.com/ibm/vault-cli/pkg/templateservice"
@@ -25,7 +24,6 @@ func (t *templateService) Exec(name string, tpl []byte, data string) ([]byte, er
 	if err := json.Unmarshal([]byte(data), &m); err != nil {
 		return nil, err
 	}
-	fmt.Printf("%v", m)
 	var err error
 	yamlbytes, err = t.ParseAndExecute(name, tpl, m)
 	if err != nil {
